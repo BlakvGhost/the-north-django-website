@@ -1,0 +1,56 @@
+{%load static %}
+<div class="sideleft">
+  <form class="ajax-s relative" action="{% url 'searchforum'%}" method="get">
+    <p class="input flex"><input type="text" name="s" placeholder="Enter a keyword" autocomplete="off" class="do full-size"><input type="submit" name="" class="dnone s"> <i class="fa fa-search fa-2x darkgeen trans" onclick="document.querySelector('.s').click()"></i> </p>
+    <div class="aJResponse absolute">
+      <ul class="list list1">
+        <span>Resultat pour <span class="receiver"></span></span>
+        <nav>
+        </nav>
+      </ul>
+    </div>
+  </form>
+  <div class="pc">
+    <h2 class="titre">{{ section }}  Category</h2>
+    <div class="">
+      <ul class="list list1">
+        {% for c,v in category %}
+          <li><a href="{%url 'categoryforum' c%} ">{{c}} </a> <span class="nb right"> ({{v}})</span> </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="pc ">
+    <h2 class="titre">{{ section }} Post Recent</h2>
+    <div class="">
+      <ul class="list list1 list2">
+        {% for post in posts%}
+        <li class="flex"><a href="{% url 'forumdetail' post.id%}" class=""><img src="{% static 'img/blog-01.jpg' %}" alt="photo de {{post.pub_author}}"> </a>
+            <a href="{% url 'forumdetail' post.id%}"><span class="post">{{post.post|striptags|truncatechars:30}}</span><span class="time"><i
+                    class="fa fa-clock-o lightgreen"></i> {{post.pub_date|timesince}} </span></a> </li>
+        {%endfor%}
+      </ul>
+    </div>
+  </div>
+  <div class="pc">
+    <h2 class="titre">{{ section }} Popular Tags</h2>
+    <div class="">
+      <ul class="list list1 flex fwp">
+          {% for nb,tag in stags %}
+        <li><a href="{%url 'categoryforum' tag%}">{{ tag }} </a></li>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="pc">
+    <h2 class="titre">Share Post</h2>
+    <div class="">
+      <ul class="list list1 flex fwp">
+        <li><a href="#"><i class="fa fa-2x fa-facebook"></i> </a></li>
+        <li><a href="#"><i class="fa fa-2x fa-twitter"></i> </a></li>
+        <li><a href="#"><i class="fa fa-2x fa-linkedin"></i> </a></li>
+        <li><a href="#"><i class="fa fa-2x fa-youtube"></i> </a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+{%extends 'base/index.html'%}
+{%block mainPage %}
+{%load static%}
+  <section class="sign-m index">
+    <div id="loader"></div>
+    <section class="flex bbx" id="main">
+      <div class="sideright full-wi">
+        <section class="flex sign">
+          <div class="signav relative">
+            <div class="shape26">
+              <img src="{%static 'img/shape/shape-26.png'%}" alt="">
+            </div>
+            <div class="logo">
+              <img src="{%static 'img/register-login.png'%}" alt="registration">
+            </div>
+          </div>
+          <div class="signfm">
+            <h1 class="relative">Enregistrer vous <span class="lightgreen ">Maintenant</span><img src="{%static 'img/shape/shape-6.png'%}" class="absolute"> </h1>
+            <form class="" action="" method="post">
+              <div class="form-check fail">
+                {{form.errors}}
+              </div>
+                {% csrf_token %}
+              <p class="form-check fail box"></p>
+              {{form.first_name}}
+              <p class="form-check fail box"></p>
+              {{form.last_name}}
+              <p class="form-check fail box"></p>
+              {{form.username}}
+              <p class="form-check fail box pa"></p>
+              {{form.email}}
+              <p class="form-check fail box"></p>
+              <label for="" class="flex vi">
+                {{form.password1}}
+                <i class="fa fa-eye"> </i>
+              </label>
+              <p class="form-check fail box"></p>
+              <label for="" class="flex vi">
+                {{form.password2}}
+                <i class="fa fa-eye"> </i>
+              </label>
+              <input type="submit" name="create" value="Creer un compte" data-name="submit" class="create">
+              <input type="submit" name="submitgoogle" value="Enregistrez-vous avec compte Google" disabled>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+  </section>
+{%endblock mainPage%}

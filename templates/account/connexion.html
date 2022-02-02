@@ -1,0 +1,37 @@
+{%extends 'base/index.html'%}
+{%block mainPage %}
+{%load static%}
+  <section class="sign-m index">
+    <section class="flex bbx" id="main">
+      <div class="sideright full-wi">
+        <section class="flex sign">
+          <div class="signav relative">
+            <div class="shape26">
+              <img src="{%static 'img/shape/shape-26.png'%}" alt="">
+            </div>
+            <div class="logo">
+              <img src="{%static 'img/register-login.png'%}" alt="registration">
+            </div>
+          </div>
+          <div class="signfm">
+            <h1 class="relative">Connectez-vous <span class="lightgreen ">Maintenant</span><img src="{%static 'img/shape/shape-6.png'%}" class="absolute"> </h1>
+              {% for message in messages %}
+                  <div class="form-check fail">{{ message }}</div>
+              {% endfor %}
+            <form class="" action="" method="post">
+                {% csrf_token %}
+              <p class="form-check fail box pa" ></p>
+              <input type="text" name="username" placeholder='username' autocomplete="username" data-u="username" required class="username">
+              <label for="" class="flex vi">
+                <input type="password" name="mdp" placeholder="Mot de passe" class="mdp" autocomplete="current-password"" data-u="mdp" required>
+                <i class="fa fa-eye"></i>
+              </label>
+              <input type="submit" name="login" value="Connectez-vous" class="create">
+              <input type="submit" name="submitgoogle" value="Connectez-vous avec compte Google">
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
+  </section>
+{%endblock mainPage%}

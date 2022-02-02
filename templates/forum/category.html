@@ -1,0 +1,52 @@
+{% extends 'base/index.html' %}
+{% block mainPage %}
+    {% load static %}
+    <section class="flex bbx mainblog forum" id="main">
+      {% include 'partials/sidebarforum.html' %}
+      <div class="sideright">
+        <div class="" style="margin:6% 2%">
+          <h2>{{cat}} </h2>
+        </div>
+        <section class="flex fwp" id="blog">
+          {% for post in forumPost %}
+            <article class="bloged brd br15 brx trans">
+              <div class="detail detaill">
+                <p class="flex">
+                  <a href="#" class="flex">
+                    <img src="{% static 'img/author-01.jpg' %}" alt="{{ post.pub_author }}">
+                 </a>
+                 <span class="name">{{ post.pub_author }}</span>
+                <span class="brand"><a href="{% url 'categoryforum' post.pub_categorie %}" class="cg">{{ post.pub_categorie }}</a> </span> </p>
+                <h2>{{ post.post }}</h2>
+                <p class="flex justify-sb">
+                  <span><i class=" fa fa-clock-o lightgreen"></i> &nbsp; {{ post.pub_date }} </span>
+                    {% for id,value in totalComments %}
+                        {% if id == post.id %}
+                  <span><i class="fa fa-comment lightgreen"></i>&nbsp; {{value }} </span>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p class="readm mt-40"><a href="
+                  {% url 'forumdetail' post.id%}">Details</a></p>
+              </div>
+            </article>
+          {% endfor %}
+        </section>
+        <div class="dots flex justify-sb">
+          {% if forumPost.has_previous %}
+        <p><a href="?p={{ forumPost.previous_page_number }}" class="fa fa-caret-left"></a></p>
+          {% endif %}
+          <div class="sp_dots flex justify-sb">
+            {% if page|length > 1%}
+            {%  for x in page %}
+                <p {% if forumPost.number == x %}class="dot_active"{% endif %}><a href="?p={{ x }}">{{ x }}</a></p>
+            {% endfor %}
+            {%endif%}
+          </div>
+        {% if forumPost.has_next %}
+          <p><a href="?p={{ forumPost.next_page_number }}" class="fa fa-caret-right"></a></p>
+        {% endif %}
+        </div>
+      </div>
+    </section>
+{% endblock mainPage %}

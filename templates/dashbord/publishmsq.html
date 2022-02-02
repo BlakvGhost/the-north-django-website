@@ -1,0 +1,90 @@
+{%extends 'dashbord/index.html'%}
+{%load static%}
+{%block page%}
+<div class="container-ps shmsk">
+<pre>{{ ex|pprint }}</pre>
+<form role="form" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="d-flex">
+    <div class="form-group w-100">
+      <label for="musique_title">Titre de la Musique</label>
+      {{ forms.post_titre }}
+    </div>
+    <div class="form-group w-100">
+      <label for="musique_genre">Genre de la Musique</label>
+      {{ forms.post_categorie }}
+    </div>
+    <div class="form-group w-100">
+      <label for="musique_pays">Pays de la Musique</label>
+      {{ forms.post_pays }}
+    </div>
+  </div>
+  <div class="d-flex w-100">
+    <div class="form-group w-100">
+      <label for="musique_annee">Annee de sortie</label>
+      {{ forms.post_annee }}
+    </div>
+    <div class="form-group w-100">
+      <label for="musique_singer">Artiste</label>
+      {{ forms.post_artiste }}
+    </div>
+    <div class="form-group w-100">
+      <label for="musique_pays">Bref Description</label>
+      {{ forms.post_description }}
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="form-group">
+      <label for="musique_image">Image de garde</label>
+      {{ forms.post_img }}
+    </div>
+    <div class="form-group mg-auto">
+      <button type="button" name="button" class="btn btn-danger war">Publish</button>
+      <button type="submit" name="create_post" class="btn btn-primary dnone warch" value="Publish Post">Publish</button>
+    </div>
+  </div>
+  </form>
+  <form class="dropzone form" action="" method="post" id="g4l1l30" enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="hidden" name="file_type" value="" class="kindof">
+    <input type="hidden" name="file_name" value="">
+    <input type="hidden" name="file_size" value="">
+    <input type="hidden" name="" value="">
+  </form>
+  <script type="text/javascript">
+    let sendBtn = document.querySelector("button[name='create_post']");
+    let kindof = document.querySelector(".kindof");
+    var type = ''
+    Dropzone.options.g4l1l30 = {
+      init: function() {
+        this.on("success", function() {
+          sendBtn.classList.remove('dnone')
+          document.querySelector('.war').classList.add('dnone')
+          });
+        this.on("totaluploadprogress",function(percent) {
+
+        });
+        this.on("error",function(percent) {
+
+        });
+      },
+    paramName: "file",
+    maxFilesize: 50,
+    timeout: 100000,
+    addRemoveLinks: true,
+    accept: function(file, done) {
+      console.log(file);
+    if (!file.type) {
+      done("Type error.");
+    }
+    else {
+       done();
+       kindof.value = file.type
+      }
+  },
+  url : "{%url 'upload'%}?type="+kindof.value,
+
+  };
+  </script>
+</div>
+{%endblock page%}

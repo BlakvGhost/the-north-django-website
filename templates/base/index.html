@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TheNorth - Africa Channel</title>
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/require.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    <script src="{% static 'js/jquery.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/app.js' %}" charset="utf-8" async></script>
+    <link rel="icon" href="{% static 'img/logo.png' %}">
+</head>
+<body class="index">
+    {% include 'partials/header.html' %}
+    <section>
+      <div id="loader"></div>
+      {% block mainPage %}
+
+      {% endblock mainPage%}
+    </section>
+    {% include 'partials/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,10 @@
+a,li {transition: 500ms all}
+.ct {text-align: center;}
+.sideleft {height: 1000px;}
+.container-ps {width: 75%;padding: 2%}
+.tit {font-size: 1.5rem;font-weight: bolder;}
+.list-group-item-action:hover {background-color: #007bff!important;color: white!important}
+.shmsk .form-group {margin: 2%;}
+.dropzone {margin: 2% 1%;height: 300px;overflow: hidden;}
+.dnone {display: none!important;}
+.mg-auto {margin: auto!important;}

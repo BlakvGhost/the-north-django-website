@@ -1,0 +1,107 @@
+{% extends 'base/index.html' %}
+{% block mainPage %}
+    {% load static %}
+    <section class="flex bbx mainblog" id="main">
+      {%include 'partials/sidebarforum.html'%}
+      <div class="sideright">
+        <div class="info flex">
+          <p class="w-20"><a href="#" class="flex"><img src="{% static 'img/author-03.jpg'%}" alt="Photo de {{ forumPost.pub_author }}"> <span
+                  class="name">{{ forumPost.pub_author }}</span> </a> </p>
+          <p class="flex">
+            <span><i class=" fa fa-clock-o lightgreen"></i> &nbsp; {{ forumPost.pub_date }} </span>
+            <span><i class="fa fa-comment lightgreen"></i>&nbsp; ({{totalComm}}) </span>
+            <span><a href="#" class="cg">{{ forumPost.pub_categorie }}</a> </span>
+          </p>
+        </div>
+        <div class="tt lh-2">
+          <h1>{{ forumPost.post }}</h1>
+        </div>
+        <div class="tags flex fwp">
+          <h3>Tags : </h3>
+              <div class="tagsdiv">
+                <ul class="flex fwp full-w list">
+                  {% for tag in tags %}
+                  <li><a>{{ tag }} </a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+        </div>
+        <div class="share flex ">
+          <h3 class="w-20 lh-2">Share : </h3> <p class="full-w"><a href="#"><i class="fa fa-facebook-square"></i> </a><a href="#"><i class="fa fa-twitter-square"></i> </a><a href="#"><i class="fa fa-linkedin-square"></i> </a> <a href="#"><i class="fa fa-dribbble"></i> </a> </p>
+        </div>
+        <div class="comments">
+          <div class="" style="margin:6% 2%">
+            <h2>Comments ({{totalComm}})</h2>
+          </div>
+          {% for commentsPoste in commentsPost  %}
+          <div class="comment">
+            <div class="under flex justify-sb">
+              <nav class="flex">
+                <p><img src="{%static 'img/author-03.jpg'%}" alt="photo de {{ commentsPoste.comment_author }}"> </p>
+                <p>
+                  <span class="name">{{ commentsPoste.comment_author }}</span>
+                  <span class="detail">Etudiante,USA || <em class="times rose">{{ commentsPoste.comment_date|timesince }}</em>
+                  </span>
+                </p>
+              </nav>
+              <nav class="reply"><a><i class="fa fa-reply"></i>  Reply</a> </nav>
+            </div>
+            <div class="cmt-cp lh-2">
+              <p>{{ commentsPoste.comment }}</p>
+            </div>
+          </div>
+              {% for reply in Reply %}
+        {% if reply.comment_replyedTo == commentsPoste.comment_author %}
+            <div class="flex justify-sb">
+              <img src="{%static 'img/shape/reply.png'%}" alt="">
+              <div class="replyed comment">
+                <div class="under flex justify-sb">
+                  <nav class="flex">
+                    <p><img src="{%static 'img/author-03.jpg'%}" alt="photo de {{ commentsPoste.comment_author }}"> </p>
+                    <p><span class="name">{{ commentsPoste.comment_author }}</span><span class="detail">Etudiante,USA
+                        || <em class="times rose">{{ commentsPoste.comment_date }}</em> </span>
+                    </p>
+                  </nav>
+                  <nav class="reply"> <a><i class="fa fa-reply"></i>  Reply</a></nav>
+                </div>
+                <div class="cmt-cp lh-2">
+                  <p>{{ commentsPoste.comment }}</p>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+                  {% endfor %}
+            {% endfor %}
+            <div class="dots flex justify-sb">
+              {% if forumPost.has_previous %}
+            <p><a href="?p={{ commentsPost.previous_page_number }}" class="fa fa-caret-left"></a></p>
+              {% endif %}
+              <div class="sp_dots flex justify-sb">
+                {% if page|length > 1%}
+                {%  for x in page %}
+                    <p {% if commentsPost.number == x %}class="dot_active"{% endif %}><a href="?p={{ x }}">{{ x }}</a></p>
+                {% endfor %}
+                {%endif%}
+              </div>
+            {% if forumPost.has_next %}
+              <p><a href="?p={{ commentsPost.next_page_number }}" class="fa fa-caret-right"></a></p>
+            {% endif %}
+            </div>
+        </div>
+        <div class="answer">
+          <div class="" style="margin:6% 2%">
+            <h2>Leave a comment</h2>
+          </div>
+          <form class="leaveComment" action="" method="post">
+            {% csrf_token %}
+            <div class="warning" style="padding:1%;margin:1%;width:100%;font-size:1.2rem;">Répondre à : <span class="replyTo bolder">{{ forumPost.pub_author }}</span>
+              <input type="hidden" name="commentType" value="just comment" data-u="commentType">
+              <input type="hidden" name="replyTo" value="{{ forumPost.pub_author }}" class="expeditor">
+            </div>
+            {{ CommentForm.comment }}
+            <input type="submit" name="send" value="Envoyer">
+          </form>
+        </div>
+      </div>
+    </section>
+{% endblock mainPage %}

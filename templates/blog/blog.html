@@ -1,0 +1,47 @@
+{% extends 'base/index.html' %}
+{% block mainPage %}
+    {% load static %}
+<section class="flex bbx mainblog" id="main">
+    {% include 'partials/sidebarblog.html' %}
+      <div class="sideright">
+        <section class="flex fwp" id="blog">
+            {% for blog in all %}
+            <article class="bloged brd br15 trans">
+              <nav class="logo">
+                <img src="/medias/{{ blog.post_img }}" alt="photo ..." class="br15">
+              </nav>
+              <nav class="detail">
+                <p class="flex">
+                  <a href="#" class="flex">
+                    <img src="{% static 'img/author-01.jpg' %}" alt="Photo de Wiliam Jason">
+                 </a>
+                 <span class="name">{{ blog.post_author }}</span>
+                <span class="brand"><a href="#" class="cg">{{ blog.pub_categorie }}</a> </span> </p>
+                <h2>{{ blog.post_title }}</h2>
+                <p class="flex justify-sb">
+                  <span><i class=" fa fa-clock-o lightgreen"></i> &nbsp; {{ blog.post_date|timesince }} </span>
+                  <span><i class="fa fa-heart lightgreen"></i>&nbsp; 2049+ </span>
+                </p>
+                <p class="readm mt-40"><a href="{% url 'blogdetail' blog.id %}">Read More</a></p>
+              </nav>
+            </article>
+            {% endfor %}
+        </section>
+       <div class="dots flex justify-sb">
+          {% if all.has_previous %}
+        <p><a href="?p={{ all.previous_page_number }}" class="fa fa-caret-left"></a></p>
+          {% endif %}
+          <div class="sp_dots flex justify-sb">
+            {% if page|length > 1%}
+            {%  for x in page %}
+                <p {% if all.number == x %}class="dot_active"{% endif %}><a href="?p={{ x }}">{{ x }}</a></p>
+            {% endfor %}
+            {%endif%}
+          </div>
+        {% if all.has_next %}
+          <p><a href="?p={{ all.next_page_number }}" class="fa fa-caret-right"></a></p>
+        {% endif %}
+        </div>
+      </div>
+ </section>
+{% endblock mainPage %}

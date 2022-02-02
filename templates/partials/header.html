@@ -1,0 +1,39 @@
+{%load static%}
+<header class="relative">
+  <section class="flex h1 b  trans">
+    <p class="white">Creer un compte <a href="#" class="lightgreen">premium</a> a 1000 FCFA</p>
+    <p class="middle">
+        {% if request.user.is_authenticated %}
+          <a href="{%url 'logout' %}">Se Deconnecter  {{ request.user }}</a>
+        {% else %}
+            <a href="{%url 'connexion' %}">Se connecter</a>
+             <a href="{%url 'inscription' %}">Creer un compte</a>
+        {% endif %}
+       </p>
+    <p><a href="#"><i class="fa fa-facebook"></i> </a><a href="#"><i class="fa fa-twitter"></i> </a><a href="#"><i class="fa fa-linkedin"></i> </a><a href="#"><i class="fa fa-facebook"></i></a></p>
+  </section>
+  <section class="h2 relative">
+    <div class="under-h2 flex justify-sb trans">
+      <div class="logo">
+        <a href="index.php"><img src="{% static 'img/logo.png' %}"" alt=""></a>
+      </div>
+      <div class="div-ul">
+        <ul class="list flex justify-sb">
+          <li><a href="{%url 'home' %}">Home</a> </li>
+          <li><a href="{%url 'indexblog' %}">Blog</a> </li>
+          <li><a href="{%url 'connexion' %}">Videos</a> </li>
+          <li><a >Steaming</a> </li>
+        </ul>
+      </div>
+      <div class="">
+        <div class="last-ul">
+          <ul class="list flex">
+            <li><a >Actualites</a> </li>
+            <li><a href="{%url 'indexforum' %}">Forum</a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {%include 'partials/middle.html' %}
+  </section>
+</header>

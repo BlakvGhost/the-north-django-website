@@ -1,0 +1,32 @@
+{%extends 'dashbord/index.html'%}
+{%load static%}
+{%block page%}
+    <div class="container-ps">
+        <form role="form" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+	<div class="form-group">
+		<label for="post_title">Post Title</label>
+		{{ form.post_title }}
+	</div>
+
+	<div class="form-group">
+	<label for="cat_title">Category</label>
+		{{ form.pub_categorie }}
+	</div>
+
+	<div class="form-group">
+		<label for="post_image">Post Image</label>
+		{{ form.post_img }}
+	</div>
+	<div class="form-group">
+		<label for="post_tag">Post Tags</label>
+		{{ form.pub_tags }}
+	</div>
+	<div class="form-group">
+		<label for="post_content">Post Content</label>
+        <textarea name="post_content" id="" cols="40" rows="14" class="form-control"></textarea>
+	</div>
+<button type="submit" name="create_post" class="btn btn-primary" value="Publish Post">Publish Post</button>
+</form>
+    </div>
+{%endblock page%}
